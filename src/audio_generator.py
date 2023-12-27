@@ -39,21 +39,20 @@ class AudioGenerator:
 
         segments = AudioSegment.empty()
 
-        with tempfile.TemporaryDirectory() as tmpdirname:
-            try:
-                for i, t in enumerate(texts):
-                    filename = os.path.join(tmpdirname, f"{i}out.mp3")
+        try:
+            for i, t in enumerate(texts):
+                filename = os.path.join(self.output_dir, f"{post.hash}_{i}out.mp3")
 
-                    sys.stdout = open(os.devnull, 'w') # block tiktok_tts print() spam
-                    tiktok_tts(t, voice, filename, play_sound=False)
-                    sys.stdout = sys.__stdout__ # restore printing
+                sys.stdout = open(os.devnull, 'w')  # block tiktok_tts print() spam
+                tiktok_tts(t, voice, filename, play_sound=False)
+                sys.stdout = sys.__stdout__  # restore printing
 
-                    segments += AudioSegment.from_file(filename, format='mp3')
+                segments += AudioSegment.from_file(filename, format='mp3')
 
-                audio_path = os.path.join(self.output_dir, f'{post.hash}.mp3')
-                segments.export(audio_path)
-                self.logger.debug(f"Generated audio for post {post.short_hash}")
-                return True
-            except Exception as e:
-                self.logger.error(f"Failed to generate audio for post {post.short_hash}: {e}")
-                return False
+            audio_path = os.path.join(self.output_dir, f'{post.hash}.mp3')
+            segments.export(audio_path)
+            self.logger.debug(f"Generated audio for post {post.short_hash}")
+            return True
+        except Exception as e:
+            self.logger.error(f"Failed to generate audio for post {post.short_hash}: {e}")
+            return False
