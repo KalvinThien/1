@@ -1,10 +1,10 @@
-DB_PATH = 'data/db/db.sqlite3'
-AUDIO_DIR = 'data/audio'
-SUBTITLE_DIR = 'data/subtitles'
-BACKGROUNDS_DIR = 'data/video/bg'
-VIDEO_DIR = 'data/video/done'
+DB_PATH = '/content/1/db.sqlite3'
+AUDIO_DIR = '/content/1/data/audio'
+SUBTITLE_DIR = '/content/1/data/subtitles'
+BACKGROUNDS_DIR = '/content/1/data/video/bg'
+VIDEO_DIR = '/content/1/data/video/done'
 FONT = {
-    'PATH': 'data/ttf/LiberationSans-Regular.ttf',
+    'PATH': '/content/1/data/ttf/LiberationSans-Regular.ttf',
     'NAME': 'Liberation Sans Regular',
     'SIZE': 20
 }
