@@ -19,6 +19,9 @@ class AudioGenerator:
     def __init__(self, loglevel = logging.INFO):
         self.logger = setup_logger(__name__, loglevel, emoji='🎵')
         self.output_dir = AUDIO_DIR
+        if not os.path.exists(self.output_dir):
+            os.makedirs(self.output_dir)
+
 
     def from_post(self, post):
         """
