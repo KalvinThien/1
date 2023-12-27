@@ -1,3 +1,4 @@
+import os
 import whisper
 import logging
 
@@ -6,10 +7,14 @@ from config.structure import AUDIO_DIR, SUBTITLE_DIR
 from utils.text import shorten_hash
 
 class Subtitler:
-    def __init__(self, loglevel = logging.INFO):
+    def __init__(self, loglevel=logging.INFO):
         self.logger = setup_logger(__name__, loglevel, emoji='📝')
         self.model = whisper.load_model('small.en')
         self.writer = whisper.utils.WriteSRT(SUBTITLE_DIR)
+
+        # Check if the subtitle directory exists, if not, create it
+        if not os.path.exists(SUBTITLE_DIR):
+            os.makedirs(SUBTITLE_DIR)
 
     def from_post(self, post):
         if post.audio and not post.subtitles:
